@@ -260,6 +260,7 @@ async function getStorageConnection(endpoint, token) {
     };
 
     const raw = await request(`https://${endpoint}/tenant/settings?api-version=2018-01-01`, options);
+    process.stdout.write(`https://${endpoint}/tenant/settings?api-version=2018-01-01`)
     try {
         const body = JSON.parse(raw);
         return body.settings.PortalStorageConnectionString;
@@ -291,4 +292,4 @@ async function publish(endpoint, token) {
     await request(url, options);
 }
 
-test = run();
+test = await run();
