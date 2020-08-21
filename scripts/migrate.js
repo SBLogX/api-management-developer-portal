@@ -265,7 +265,9 @@ async function getStorageConnection(endpoint, token) {
         return body.settings.PortalStorageConnectionString;
     }
     catch (e) {
-        throw Error('Storage connection could not be retrieved: ' + e);
+        const message = "Storage connection could not be retrieved: " + e + " \
+        " + raw
+        throw Error(message);
     }
 }
 
