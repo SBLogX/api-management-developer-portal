@@ -1,18 +1,18 @@
 /**
  * This script automates deployments between developer portal instances.
  * In order to run it, you need to:
- * 
+ *
  * 1) Clone the api-management-developer-portal repository
  * 2) `npm install` in the root of the project
  * 3) Install az-cli (https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
  * 4) Run this script with a valid combination of arguments
- * 
+ *
  * Managed portal command example:
  * node migrate --sourceEndpoint from.management.azure-api.net --destEndpoint to.management.azure-api.net --publishEndpoint to.developer.azure-api.net --sourceToken "SharedAccessSignature integration&2020..." --destToken "SharedAccessSignature integration&2020..."
- * 
+ *
  * If you run with the --selfHosted flag, you are expected to supply a sourceStorage and destStorage parameters.
  * Auto-publishing is not supported for self-hosted versions, so make sure you publish the portal (for example, locally) and upload the generated static files to your hosting after the migration is completed.
- * 
+ *
  * You can specify the SAS tokens directly (via sourceToken and destToken), or you can supply an identifier and key,
  * and the script will generate tokens that expire in 1 hour. (via sourceId, sourceKey, destId, destKey)
  */
@@ -126,7 +126,7 @@ async function run() {
     const destToken = await getTokenOrThrow(yargs.destToken, yargs.destId, yargs.destKey);
     const destStorage = await getStorageConnectionOrThrow(yargs.destStorage, destEndpoint, destToken);
     const publishEndpoint = yargs.publishEndpoint;
-    
+
     // the rest of this mirrors migrate.bat, but since we're JS, we're platform-agnostic.
     const dataFile = '../dist/data.json';
     const mediaFolder = '../dist/content';
@@ -208,7 +208,7 @@ async function getTokenOrThrow(token, id, key) {
 /**
  * Generates a SAS token from the specified Management API id and key.  Optionally
  * specify the expiry time, in seconds.
- * 
+ *
  * See https://docs.microsoft.com/en-us/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-authentication#ManuallyCreateToken
  * @param {string} id The Management API identifier.
  * @param {string} key The Management API key (primary or secondary)
@@ -284,11 +284,11 @@ async function publish(endpoint, token) {
             'Authorization': token
         }
     };
-    
+
     const url = `https://${endpoint}/publish`;
-    
+
     // returns with literal OK (missing quotes), which is invalid json.
     await request(url, options);
 }
 
-run();
+test = run();
