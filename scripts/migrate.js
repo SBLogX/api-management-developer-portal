@@ -292,4 +292,6 @@ async function publish(endpoint, token) {
     await request(url, options);
 }
 
-test = await run();
+run();
+
+setTimeout(() => {  console.log("Waiting..."); }, 5000);
