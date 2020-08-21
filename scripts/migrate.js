@@ -266,7 +266,7 @@ async function getStorageConnection(endpoint, token) {
     }
     catch (e) {
         const message = "Storage connection could not be retrieved: " + e + " \
-        " + raw
+        raw data: " + raw
         throw Error(message);
     }
 }
